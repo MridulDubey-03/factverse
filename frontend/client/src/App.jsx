@@ -1,225 +1,87 @@
-import React, { useState, forwardRef } from 'react';
-
-function AppWrapper({ children }) {
-  return <div className="min-h-screen bg-white text-gray-900 font-sans antialiased">{children}</div>;
-}
-
-const Button = forwardRef(({ className, variant = 'default', size = 'default', onClick, children, ...props }, ref) => {
-  const baseClasses = "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50";
-  const variants = {
-    default: "bg-primary text-white shadow hover:bg-primary/90",
-    ghost: "hover:bg-gray-100 hover:text-gray-900",
-  };
-  const sizes = {
-    default: "h-9 px-4 py-2",
-    sm: "h-8 rounded-md px-3 text-xs",
-  };
-
-  const finalClasses = `${baseClasses} ${variants[variant]} ${sizes[size]} ${className || ''}`;
-
-  return (
-    <button className={finalClasses} onClick={onClick} ref={ref} {...props}>
-      {children}
-    </button>
-  );
-});
-
-const Card = forwardRef(({ className, children, ...props }, ref) => (
-  <div ref={ref} className={`rounded-lg border bg-white text-gray-900 shadow-sm ${className || ''}`} {...props}>
-    {children}
-  </div>
-));
-
-const CardHeader = forwardRef(({ className, children, ...props }, ref) => (
-  <div ref={ref} className={`flex flex-col space-y-1.5 p-6 ${className || ''}`} {...props}>
-    {children}
-  </div>
-));
-
-const CardTitle = forwardRef(({ className, children, ...props }, ref) => (
-  <h3 ref={ref} className={`font-semibold leading-none tracking-tight ${className || ''}`} {...props}>
-    {children}
-  </h3>
-));
-
-const CardDescription = forwardRef(({ className, children, ...props }, ref) => (
-  <p ref={ref} className={`text-sm text-gray-500 ${className || ''}`} {...props}>
-    {children}
-  </p>
-));
-
-const CardContent = forwardRef(({ className, children, ...props }, ref) => (
-  <div ref={ref} className={`p-6 pt-0 ${className || ''}`} {...props}>
-    {children}
-  </div>
-));
-
-const Badge = forwardRef(({ className, variant = 'default', children, ...props }, ref) => {
-  const baseClasses = "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2";
-  const variants = {
-    default: "border-transparent bg-primary text-white hover:bg-primary/80",
-    secondary: "border-transparent bg-gray-200 text-gray-800 hover:bg-gray-300",
-  };
-
-  const finalClasses = `${baseClasses} ${variants[variant]} ${className || ''}`;
-
-  return (
-    <div className={finalClasses} ref={ref} {...props}>
-      {children}
-    </div>
-  );
-});
-
-
-function Filter(props) {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-      <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
-    </svg>
-  );
-}
-
-function Shield(props) {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-    </svg>
-  );
-}
-
-function FileText(props) {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-      <path d="M15 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V7z"></path>
-      <path d="M14 2v4a2 2 0 002 2h4"></path>
-      <line x1="10" y1="9" x2="10" y2="15"></line>
-      <line x1="14" y1="9" x2="14" y2="15"></line>
-      <line x1="12" y1="9" x2="12" y2="15"></line>
-    </svg>
-  );
-}
-
-function CheckCircle(props) {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-      <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
-      <polyline points="22 4 12 14.01 9 11.01"></polyline>
-    </svg>
-  );
-}
-
-function HelpCircle(props) {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-      <circle cx="12" cy="12" r="10"></circle>
-      <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"></path>
-      <line x1="12" y1="17" x2="12" y2="17"></line>
-    </svg>
-  );
-}
-
-function Users(props) {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-      <path d="M16 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
-      <circle cx="12" cy="7" r="4"></circle>
-      <path d="M22 21v-2a4 4 0 00-3-3.87M2 21v-2a4 4 0 013-3.87"></path>
-    </svg>
-  );
-}
-
-function Menu(props) {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-      <line x1="4" x2="20" y1="12" y2="12"></line>
-      <line x1="4" x2="20" y1="6" y2="6"></line>
-      <line x1="4" x2="20" y1="18" y2="18"></line>
-    </svg>
-  );
-}
-
-function X(props) {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-      <path d="M18 6L6 18"></path>
-      <path d="M6 6L18 18"></path>
-    </svg>
-  );
-}
-
-
-function InteractiveLogo({ size, showText = false }) {
-  const sizeClasses = {
-    sm: 'w-6 h-6',
-    lg: 'w-16 h-16',
-  };
-  return (
-    <div className="flex items-center gap-2">
-      <div className={`relative ${sizeClasses[size]}`}>
-        <svg className="absolute inset-0" viewBox="0 0 100 100">
-          <circle cx="50" cy="50" r="45" stroke="#3b82f6" strokeWidth="5" fill="none" strokeDasharray="200" strokeDashoffset="0">
-            <animate attributeName="stroke-dashoffset" from="0" to="200" dur="2s" repeatCount="indefinite" />
-          </circle>
-          <path d="M30 40 L50 60 L70 40" stroke="#3b82f6" strokeWidth="5" fill="none" strokeLinecap="round" />
-        </svg>
-      </div>
-      {showText && <span className="font-semibold text-lg text-blue-600">FactVerse</span>}
-    </div>
-  );
-}
-
-const FilterNews = () => <div className="p-8">
-    <h2 className="text-3xl font-bold mb-4">Filter News</h2>
-    <p>This is a placeholder for the news filtering functionality.</p>
-</div>;
-const DetectFakeNews = () => <div className="p-8">
-    <h2 className="text-3xl font-bold mb-4">Detect Fake News</h2>
-    <p>This is a placeholder for the fake news detection functionality.</p>
-</div>;
-const SummarizeArticles = () => <div className="p-8">
-    <h2 className="text-3xl font-bold mb-4">Summarize Articles</h2>
-    <p>This is a placeholder for the article summarization functionality.</p>
-</div>;
-const ValidateFacts = () => <div className="p-8">
-    <h2 className="text-3xl font-bold mb-4">Validate Facts</h2>
-    <p>This is a placeholder for the fact validation functionality.</p>
-</div>;
-const UserQuestions = () => <div className="p-8">
-    <h2 className="text-3xl font-bold mb-4">User Questions</h2>
-    <p>This is a placeholder for the user questions and answers section.</p>
-</div>;
-const CrowdFeedback = () => <div className="p-8">
-    <h2 className="text-3xl font-bold mb-4">Crowd Feedback</h2>
-    <p>This is a placeholder for the crowd feedback and collaborative fact-checking section.</p>
-</div>;
+import React, { useState, useEffect } from 'react';
+import { Button } from './components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './components/ui/card';
+import { Badge } from './components/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from './components/ui/tabs';
+import { FilterNews } from './components/FilterNews.jsx';
+import { DetectFakeNews } from './components/DetectFakeNews.jsx';
+import { SummarizeArticles } from './components/SummarizeArticles.jsx';
+import { ValidateFacts } from './components/ValidateFacts.jsx';
+import { UserQuestions } from './components/UserQuestions.jsx';
+import { CrowdFeedback } from './components/CrowdFeedback.jsx';
+import { EcosystemDiagram } from './components/EcosystemDiagram.jsx';
+import { InteractiveLogo } from './components/InteractiveLogo.jsx';
+import { 
+  Filter, 
+  Shield, 
+  FileText, 
+  CheckCircle, 
+  HelpCircle, 
+  Users, 
+  Menu,
+  X
+} from 'lucide-react';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isCarouselPaused, setIsCarouselPaused] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [clickEffect, setClickEffect] = useState({ show: false, x: 0, y: 0 });
+  const [hoveredCard, setHoveredCard] = useState(null);
+  const [animatedStats, setAnimatedStats] = useState({
+    articles: 0,
+    users: 0,
+    queue: 0
+  });
 
-  const style = `
-    @keyframes spin-slow {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-    .animate-spin-slow {
-      animation: spin-slow 15s linear infinite;
-    }
-    .animate-spin-paused {
-      animation-play-state: paused;
-    }
-    @keyframes spin-reverse-slow {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(-360deg); }
-    }
-    .animate-spin-reverse-slow {
-      animation: spin-reverse-slow 15s linear infinite;
-    }
-    .animate-spin-reverse-paused {
-      animation-play-state: paused;
-    }
-  `;
+  // Mouse tracking for interactive effects
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setMousePosition({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top
+    });
+  };
+
+  // Click effect animation
+  const handleClick = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setClickEffect({
+      show: true,
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top
+    });
+    setTimeout(() => setClickEffect({ show: false, x: 0, y: 0 }), 1000);
+  };
+
+  // Animated counter effect
+  useEffect(() => {
+    const targets = { articles: 12847, users: 8924, queue: 47 };
+    const duration = 2000;
+    const steps = 60;
+    const stepTime = duration / steps;
+
+    let currentStep = 0;
+    const timer = setInterval(() => {
+      currentStep++;
+      const progress = currentStep / steps;
+      const easeOut = 1 - Math.pow(1 - progress, 3);
+      
+      setAnimatedStats({
+        articles: Math.floor(targets.articles * easeOut),
+        users: Math.floor(targets.users * easeOut),
+        queue: Math.floor(targets.queue * easeOut)
+      });
+
+      if (currentStep >= steps) {
+        clearInterval(timer);
+        setAnimatedStats(targets);
+      }
+    }, stepTime);
+
+    return () => clearInterval(timer);
+  }, [activeTab]);
 
   const sections = [
     { id: 'dashboard', label: 'Home', icon: FileText },
@@ -237,79 +99,83 @@ export default function App() {
       title: 'Filter News',
       description: 'Smart filtering by source, topic, and credibility',
       icon: Filter,
-      color: 'text-blue-500',
-      bgColor: 'bg-blue-50 dark:bg-blue-950/20'
+      iconColor: 'text-cyan-300',
+      titleColor: 'text-white font-semibold drop-shadow-lg',
+      descColor: 'text-cyan-50/90 drop-shadow-md',
+      bgGradient: 'bg-gradient-to-br from-cyan-500/20 via-blue-500/20 to-indigo-500/20',
+      borderColor: 'border-cyan-300/30',
+      glowColor: 'shadow-cyan-500/25'
     },
     {
       id: 'detect',
       title: 'Detect Fake News',
       description: 'AI-powered fake news detection and analysis',
       icon: Shield,
-      color: 'text-red-500',
-      bgColor: 'bg-red-50 dark:bg-red-950/20'
+      iconColor: 'text-red-300',
+      titleColor: 'text-white font-semibold drop-shadow-lg',
+      descColor: 'text-red-50/90 drop-shadow-md',
+      bgGradient: 'bg-gradient-to-br from-red-500/20 via-pink-500/20 to-rose-500/20',
+      borderColor: 'border-red-300/30',
+      glowColor: 'shadow-red-500/25'
     },
     {
       id: 'summarize',
       title: 'Summarize Articles',
       description: 'Quick, intelligent article summaries',
       icon: FileText,
-      color: 'text-green-500',
-      bgColor: 'bg-green-50 dark:bg-green-950/20'
+      iconColor: 'text-emerald-300',
+      titleColor: 'text-white font-semibold drop-shadow-lg',
+      descColor: 'text-emerald-50/90 drop-shadow-md',
+      bgGradient: 'bg-gradient-to-br from-emerald-500/20 via-green-500/20 to-teal-500/20',
+      borderColor: 'border-emerald-300/30',
+      glowColor: 'shadow-emerald-500/25'
     },
     {
       id: 'validate',
       title: 'Validate Facts',
       description: 'Cross-reference facts with trusted sources',
       icon: CheckCircle,
-      color: 'text-purple-500',
-      bgColor: 'bg-purple-50 dark:bg-purple-950/20'
+      iconColor: 'text-violet-300',
+      titleColor: 'text-white font-semibold drop-shadow-lg',
+      descColor: 'text-violet-50/90 drop-shadow-md',
+      bgGradient: 'bg-gradient-to-br from-violet-500/20 via-purple-500/20 to-fuchsia-500/20',
+      borderColor: 'border-violet-300/30',
+      glowColor: 'shadow-violet-500/25'
     },
     {
       id: 'questions',
       title: 'User Questions',
       description: 'Community-driven Q&A and discussions',
       icon: HelpCircle,
-      color: 'text-orange-500',
-      bgColor: 'bg-orange-50 dark:bg-orange-950/20'
+      iconColor: 'text-amber-300',
+      titleColor: 'text-white font-semibold drop-shadow-lg',
+      descColor: 'text-amber-50/90 drop-shadow-md',
+      bgGradient: 'bg-gradient-to-br from-amber-500/20 via-orange-500/20 to-yellow-500/20',
+      borderColor: 'border-amber-300/30',
+      glowColor: 'shadow-amber-500/25'
     },
     {
       id: 'feedback',
       title: 'Crowd Feedback',
       description: 'Collaborative fact-checking and ratings',
       icon: Users,
-      color: 'text-teal-500',
-      bgColor: 'bg-teal-50 dark:bg-teal-950/20'
+      iconColor: 'text-sky-300',
+      titleColor: 'text-white font-semibold drop-shadow-lg',
+      descColor: 'text-sky-50/90 drop-shadow-md',
+      bgGradient: 'bg-gradient-to-br from-sky-500/20 via-blue-500/20 to-indigo-500/20',
+      borderColor: 'border-sky-300/30',
+      glowColor: 'shadow-sky-500/25'
     }
   ];
 
   return (
-    <AppWrapper>
-      <style>{`
-        @keyframes spin-slow {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-        .animate-spin-slow {
-          animation: spin-slow 15s linear infinite;
-        }
-        .animate-spin-paused {
-          animation-play-state: paused;
-        }
-        @keyframes spin-reverse-slow {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(-360deg); }
-        }
-        .animate-spin-reverse-slow {
-          animation: spin-reverse-slow 15s linear infinite;
-        }
-        .animate-spin-reverse-paused {
-          animation-play-state: paused;
-        }
-      `}</style>
-      <header className="border-b bg-white sticky top-0 z-50">
-        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+      {/* Header */}
+      <header className="border-b border-white/10 bg-black/20 backdrop-blur-xl sticky top-0 z-50">
+        <div className="container mx-auto px-4 h-14 flex items-center justify-between">
           <InteractiveLogo size="sm" showText={true} />
-
+          
+          {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-1">
             {sections.map((section) => {
               const Icon = section.icon;
@@ -319,28 +185,36 @@ export default function App() {
                   variant={activeTab === section.id ? "default" : "ghost"}
                   size="sm"
                   onClick={() => setActiveTab(section.id)}
-                  className="gap-2"
+                  className={`gap-2 transition-all duration-300 hover:scale-105 text-white ${
+                    activeTab === section.id 
+                      ? 'bg-gradient-to-r from-cyan-500/20 to-purple-500/20 border border-white/20 shadow-lg' 
+                      : 'hover:bg-white/10 hover:text-white'
+                  }`}
                 >
-                  <Icon className="w-4 h-4" />
-                  {section.label}
+                  <Icon className={`w-4 h-4 transition-all duration-300 text-white ${
+                    activeTab === section.id ? 'text-cyan-300' : ''
+                  } hover:scale-110`} />
+                  <span className="text-white">{section.label}</span>
                 </Button>
               );
             })}
           </nav>
 
+          {/* Mobile Menu Button */}
           <Button
             variant="ghost"
             size="sm"
-            className="md:hidden"
+            className="md:hidden text-white hover:text-white"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {mobileMenuOpen ? <X className="w-5 h-5 text-white" /> : <Menu className="w-5 h-5 text-white" />}
           </Button>
         </div>
 
+        {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-t bg-white">
-            <nav className="container mx-auto px-4 py-4 grid grid-cols-2 gap-2">
+          <div className="md:hidden border-t border-white/10 bg-black/30 backdrop-blur-xl">
+            <nav className="container mx-auto px-4 py-3 grid grid-cols-2 gap-2">
               {sections.map((section) => {
                 const Icon = section.icon;
                 return (
@@ -352,10 +226,14 @@ export default function App() {
                       setActiveTab(section.id);
                       setMobileMenuOpen(false);
                     }}
-                    className="gap-2 justify-start"
+                    className={`gap-2 justify-start transition-all duration-300 text-white ${
+                      activeTab === section.id 
+                        ? 'bg-gradient-to-r from-cyan-500/20 to-purple-500/20 border border-white/20' 
+                        : 'hover:bg-white/10'
+                    }`}
                   >
-                    <Icon className="w-4 h-4" />
-                    {section.label}
+                    <Icon className={`w-4 h-4 text-white ${activeTab === section.id ? 'text-cyan-300' : ''}`} />
+                    <span className="text-white">{section.label}</span>
                   </Button>
                 );
               })}
@@ -364,54 +242,146 @@ export default function App() {
         )}
       </header>
 
-      <main className="container mx-auto px-4 py-8">
+      {/* Main Content */}
+      <main className="container mx-auto px-4 py-6">
         {activeTab === 'dashboard' && (
-          <div className="space-y-8">
-            <div
-              className="relative flex items-center justify-center min-h-[600px]"
+          <div className="space-y-6">
+            {/* Central Card with Rotating Carousel */}
+            <div 
+              className="relative flex items-center justify-center min-h-[550px] overflow-hidden cursor-none"
               onMouseEnter={() => setIsCarouselPaused(true)}
               onMouseLeave={() => setIsCarouselPaused(false)}
+              onMouseMove={handleMouseMove}
+              onClick={handleClick}
             >
-              <Card className="relative z-10 w-80 h-80 flex flex-col items-center justify-center text-center shadow-2xl border-2 overflow-hidden">
-                <CardContent className="space-y-6 p-8 flex flex-col items-center">
+              {/* Interactive Mouse Follower */}
+              <div 
+                className="absolute w-8 h-8 bg-gradient-to-r from-cyan-400/30 to-purple-400/30 rounded-full pointer-events-none z-50 transition-all duration-300 ease-out"
+                style={{
+                  left: `${mousePosition.x - 16}px`,
+                  top: `${mousePosition.y - 16}px`,
+                  transform: `scale(${hoveredCard ? 1.5 : 1})`,
+                }}
+              />
+              
+              {/* Click Ripple Effect */}
+              {clickEffect.show && (
+                <div 
+                  className="absolute w-4 h-4 border-2 border-white/50 rounded-full pointer-events-none z-40 animate-ping"
+                  style={{
+                    left: `${clickEffect.x - 8}px`,
+                    top: `${clickEffect.y - 8}px`,
+                  }}
+                />
+              )}
+              {/* Ambient Glow Background */}
+              <div className="absolute inset-0 bg-gradient-radial from-purple-500/10 via-transparent to-transparent opacity-60 blur-3xl"></div>
+              
+              {/* Floating Particles */}
+              <div className="absolute inset-0 pointer-events-none">
+                {Array.from({ length: 25 }).map((_, i) => {
+                  const colors = ['bg-cyan-400/30', 'bg-purple-400/30', 'bg-pink-400/30', 'bg-emerald-400/30', 'bg-orange-400/30'];
+                  const sizes = ['w-1 h-1', 'w-2 h-2', 'w-1.5 h-1.5'];
+                  return (
+                    <div
+                      key={i}
+                      className={`absolute ${colors[i % colors.length]} ${sizes[i % sizes.length]} rounded-full animate-float`}
+                      style={{
+                        left: `${Math.random() * 100}%`,
+                        top: `${Math.random() * 100}%`,
+                        animationDelay: `${Math.random() * 5}s`,
+                        animationDuration: `${4 + Math.random() * 3}s`
+                      }}
+                    />
+                  );
+                })}
+              </div>
+              
+              {/* Decorative Rings */}
+              <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 border border-white/5 rounded-full"></div>
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] border border-white/10 rounded-full"></div>
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-gradient-to-r from-cyan-500/20 via-purple-500/20 to-pink-500/20 rounded-full"></div>
+              </div>
+              
+              {/* Corner Accent Elements */}
+              <div className="absolute top-10 left-10 w-12 h-12 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-lg border border-cyan-300/20 backdrop-blur-sm animate-glow"></div>
+              <div className="absolute top-10 right-10 w-12 h-12 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-lg border border-purple-300/20 backdrop-blur-sm animate-glow" style={{animationDelay: '1s'}}></div>
+              <div className="absolute bottom-10 left-10 w-12 h-12 bg-gradient-to-br from-emerald-500/20 to-teal-500/20 rounded-lg border border-emerald-300/20 backdrop-blur-sm animate-glow" style={{animationDelay: '2s'}}></div>
+              <div className="absolute bottom-10 right-10 w-12 h-12 bg-gradient-to-br from-orange-500/20 to-yellow-500/20 rounded-lg border border-orange-300/20 backdrop-blur-sm animate-glow" style={{animationDelay: '3s'}}></div>
+              
+              {/* Additional Decorative Elements */}
+              <div className="absolute top-1/4 left-8 w-3 h-3 bg-cyan-400/40 rounded-full animate-pulse"></div>
+              <div className="absolute top-1/3 right-8 w-2 h-2 bg-purple-400/40 rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
+              <div className="absolute bottom-1/4 left-6 w-4 h-4 bg-emerald-400/40 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
+              <div className="absolute bottom-1/3 right-6 w-2.5 h-2.5 bg-orange-400/40 rounded-full animate-pulse" style={{animationDelay: '1.5s'}}></div>
+              
+              {/* Grid Pattern Overlay */}
+              <div className="absolute inset-0 opacity-5" style={{
+                backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
+                backgroundSize: '20px 20px'
+              }}></div>
+              
+              {/* Central FactVerse Card */}
+              <Card className="relative z-10 w-80 h-80 flex flex-col items-center justify-center text-center shadow-2xl border border-white/20 bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-xl overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-purple-500/10 to-pink-500/10"></div>
+                <CardContent className="relative space-y-4 p-6 flex flex-col items-center">
                   <InteractiveLogo size="lg" />
                   <div>
-                    <h2 className="text-3xl font-medium mb-2 bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-700 bg-clip-text text-transparent">
+                    <h2 className="text-3xl font-medium mb-2 bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
                       FactVerse
                     </h2>
-                    <p className="text-gray-500">
+                    <p className="text-white/80 text-sm leading-relaxed">
                       Your trusted platform for news verification and fact-checking
                     </p>
                   </div>
                 </CardContent>
               </Card>
 
+              {/* Rotating Feature Cards */}
               <div className={`absolute inset-0 ${isCarouselPaused ? 'animate-spin-paused' : 'animate-spin-slow'}`}>
                 {featureCards.map((feature, index) => {
                   const Icon = feature.icon;
-                  const angle = (index * 60) - 90;
-                  const radius = 250;
+                  const angle = (index * 60) - 90; // 60 degrees apart, starting from top
+                  const radius = 240; // Distance from center
                   const x = Math.cos((angle * Math.PI) / 180) * radius;
                   const y = Math.sin((angle * Math.PI) / 180) * radius;
-
+                  
                   return (
                     <Card
                       key={feature.id}
-                      className={`absolute w-48 h-32 cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-lg ${feature.bgColor} ${isCarouselPaused ? 'animate-spin-reverse-paused' : 'animate-spin-reverse-slow'}`}
+                      className={`absolute w-44 h-28 cursor-pointer transition-all duration-500 hover:scale-110 hover:shadow-2xl ${feature.bgGradient} ${feature.borderColor} ${feature.glowColor} border backdrop-blur-sm ${isCarouselPaused ? 'animate-spin-reverse-paused' : 'animate-spin-reverse-slow'} hover:shadow-xl group`}
                       style={{
-                        left: `calc(50% + ${x}px - 6rem)`,
-                        top: `calc(50% + ${y}px - 4rem)`,
+                        left: `calc(50% + ${x}px - 5.5rem)`,
+                        top: `calc(50% + ${y}px - 3.5rem)`,
+                        transform: hoveredCard === feature.id ? 'scale(1.15)' : 'scale(1)',
                       }}
-                      onClick={() => setActiveTab(feature.id)}
+                      onClick={() => {
+                        setActiveTab(feature.id);
+                        // Add click animation
+                        setClickEffect({
+                          show: true,
+                          x: mousePosition.x,
+                          y: mousePosition.y
+                        });
+                      }}
+                      onMouseEnter={() => setHoveredCard(feature.id)}
+                      onMouseLeave={() => setHoveredCard(null)}
                     >
-                      <CardContent className="p-4 h-full flex flex-col justify-center">
-                        <div className="flex items-center gap-2 mb-2">
-                          <Icon className={`w-5 h-5 ${feature.color}`} />
-                          <h3 className="font-medium text-sm">{feature.title}</h3>
+                      <CardContent className="p-3 h-full flex flex-col justify-center relative overflow-hidden">
+                        <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent group-hover:from-white/10"></div>
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div className="relative z-10">
+                          <div className="flex items-center gap-2 mb-1">
+                            <Icon className={`w-4 h-4 ${feature.iconColor} drop-shadow-lg group-hover:scale-110 transition-transform duration-300`} />
+                            <h3 className={`${feature.titleColor} text-xs transition-all duration-300 group-hover:text-sm`}>{feature.title}</h3>
+                          </div>
+                          <p className={`text-xs ${feature.descColor} leading-tight transition-all duration-300 group-hover:text-opacity-100`}>
+                            {feature.description}
+                          </p>
                         </div>
-                        <p className="text-xs text-gray-500 leading-relaxed">
-                          {feature.description}
-                        </p>
+                        {/* Hover glow effect */}
+                        <div className={`absolute inset-0 bg-gradient-to-br ${feature.iconColor.replace('text-', 'from-')}10 to-transparent opacity-0 group-hover:opacity-50 transition-opacity duration-500`}></div>
                       </CardContent>
                     </Card>
                   );
@@ -419,88 +389,135 @@ export default function App() {
               </div>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6 mt-16">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Shield className="w-5 h-5 text-red-500" />
+            {/* Interactive Feature Highlights */}
+            <div className="grid md:grid-cols-4 gap-3 mt-8">
+              <Card className="border border-purple-500/20 bg-gradient-to-br from-purple-500/10 to-indigo-500/10 backdrop-blur-sm p-4 text-center cursor-pointer hover:scale-105 transition-all duration-300 group hover:shadow-lg hover:shadow-purple-500/25">
+                <div className="text-purple-400 text-2xl mb-2 group-hover:animate-bounce">⚡</div>
+                <div className="text-white text-sm font-medium drop-shadow-lg">Real-time Analysis</div>
+                <div className="text-purple-200/80 text-xs mt-1">Lightning fast processing</div>
+              </Card>
+              <Card className="border border-cyan-500/20 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 backdrop-blur-sm p-4 text-center cursor-pointer hover:scale-105 transition-all duration-300 group hover:shadow-lg hover:shadow-cyan-500/25">
+                <div className="text-cyan-400 text-2xl mb-2 group-hover:animate-pulse">🔍</div>
+                <div className="text-white text-sm font-medium drop-shadow-lg">AI Detection</div>
+                <div className="text-cyan-200/80 text-xs mt-1">Advanced algorithms</div>
+              </Card>
+              <Card className="border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 to-green-500/10 backdrop-blur-sm p-4 text-center cursor-pointer hover:scale-105 transition-all duration-300 group hover:shadow-lg hover:shadow-emerald-500/25">
+                <div className="text-emerald-400 text-2xl mb-2 group-hover:animate-spin">📊</div>
+                <div className="text-white text-sm font-medium drop-shadow-lg">Data Insights</div>
+                <div className="text-emerald-200/80 text-xs mt-1">Comprehensive analytics</div>
+              </Card>
+              <Card className="border border-orange-500/20 bg-gradient-to-br from-orange-500/10 to-amber-500/10 backdrop-blur-sm p-4 text-center cursor-pointer hover:scale-105 transition-all duration-300 group hover:shadow-lg hover:shadow-orange-500/25">
+                <div className="text-orange-400 text-2xl mb-2 group-hover:animate-pulse">🤝</div>
+                <div className="text-white text-sm font-medium drop-shadow-lg">Community Driven</div>
+                <div className="text-orange-200/80 text-xs mt-1">Collaborative verification</div>
+              </Card>
+            </div>
+
+            {/* Stats Cards */}
+            <div className="grid md:grid-cols-3 gap-4 mt-8">
+              <Card className="border border-red-500/20 bg-gradient-to-br from-red-500/10 via-pink-500/5 to-transparent backdrop-blur-sm hover:shadow-lg hover:shadow-red-500/25 transition-all duration-300">
+                <CardHeader className="pb-3">
+                  <CardTitle className="flex items-center gap-2 text-white">
+                    <Shield className="w-5 h-5 text-red-400" />
                     Fact-Checking
                   </CardTitle>
-                  <CardDescription>
+                  <CardDescription className="text-white/60 text-sm">
                     AI-powered detection and verification
                   </CardDescription>
                 </CardHeader>
-                <CardContent>
-                  <div className="space-y-2">
-                    <div className="flex justify-between">
-                      <span>Articles Verified</span>
-                      <Badge variant="secondary">12,847</Badge>
+                <CardContent className="pt-0">
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center">
+                      <span className="text-white/80 text-sm">Articles Verified</span>
+                      <Badge className="bg-red-500/20 text-red-300 border-red-500/30 animate-pulse">{animatedStats.articles.toLocaleString()}</Badge>
                     </div>
-                    <div className="flex justify-between">
-                      <span>Accuracy Rate</span>
-                      <Badge className="bg-green-100 text-green-800">94.2%</Badge>
+                    <div className="flex justify-between items-center">
+                      <span className="text-white/80 text-sm">Accuracy Rate</span>
+                      <Badge className="bg-emerald-500/20 text-emerald-300 border-emerald-500/30">94.2%</Badge>
                     </div>
                   </div>
                 </CardContent>
               </Card>
 
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Users className="w-5 h-5 text-blue-500" />
+              <Card className="border border-blue-500/20 bg-gradient-to-br from-blue-500/10 via-cyan-500/5 to-transparent backdrop-blur-sm hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300">
+                <CardHeader className="pb-3">
+                  <CardTitle className="flex items-center gap-2 text-white">
+                    <Users className="w-5 h-5 text-blue-400" />
                     Community
                   </CardTitle>
-                  <CardDescription>
+                  <CardDescription className="text-white/60 text-sm">
                     User contributions and feedback
                   </CardDescription>
                 </CardHeader>
-                <CardContent>
-                  <div className="space-y-2">
-                    <div className="flex justify-between">
-                      <span>Active Users</span>
-                      <Badge variant="secondary">8,924</Badge>
+                <CardContent className="pt-0">
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center">
+                      <span className="text-white/80 text-sm">Active Users</span>
+                      <Badge className="bg-blue-500/20 text-blue-300 border-blue-500/30 animate-pulse">{animatedStats.users.toLocaleString()}</Badge>
                     </div>
-                    <div className="flex justify-between">
-                      <span>Feedback Score</span>
-                      <Badge className="bg-blue-100 text-blue-800">4.7/5</Badge>
+                    <div className="flex justify-between items-center">
+                      <span className="text-white/80 text-sm">Feedback Score</span>
+                      <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-500/30">4.7/5</Badge>
                     </div>
                   </div>
                 </CardContent>
               </Card>
 
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <FileText className="w-5 h-5 text-orange-500" />
+              <Card className="border border-orange-500/20 bg-gradient-to-br from-orange-500/10 via-amber-500/5 to-transparent backdrop-blur-sm hover:shadow-lg hover:shadow-orange-500/25 transition-all duration-300">
+                <CardHeader className="pb-3">
+                  <CardTitle className="flex items-center gap-2 text-white">
+                    <FileText className="w-5 h-5 text-orange-400" />
                     Processing
                   </CardTitle>
-                  <CardDescription>
+                  <CardDescription className="text-white/60 text-sm">
                     Real-time article analysis
                   </CardDescription>
                 </CardHeader>
-                <CardContent>
-                  <div className="space-y-2">
-                    <div className="flex justify-between">
-                      <span>Queue Length</span>
-                      <Badge variant="secondary">47</Badge>
+                <CardContent className="pt-0">
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center">
+                      <span className="text-white/80 text-sm">Queue Length</span>
+                      <Badge className="bg-orange-500/20 text-orange-300 border-orange-500/30 animate-pulse">{animatedStats.queue}</Badge>
                     </div>
-                    <div className="flex justify-between">
-                      <span>Avg. Process Time</span>
-                      <Badge className="bg-orange-100 text-orange-800">2.3s</Badge>
+                    <div className="flex justify-between items-center">
+                      <span className="text-white/80 text-sm">Avg. Process Time</span>
+                      <Badge className="bg-amber-500/20 text-amber-300 border-amber-500/30">2.3s</Badge>
                     </div>
                   </div>
                 </CardContent>
               </Card>
             </div>
+
+            {/* Interactive Bottom Status */}
+            <div className="mt-8 flex justify-center items-center gap-8">
+              <div className="flex items-center gap-2 text-white/60 text-sm cursor-pointer hover:text-white transition-colors duration-300 group">
+                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse group-hover:w-3 group-hover:h-3 transition-all duration-300"></div>
+                <span>System Online</span>
+              </div>
+              <div className="flex items-center gap-2 text-white/60 text-sm cursor-pointer hover:text-white transition-colors duration-300 group">
+                <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse group-hover:w-3 group-hover:h-3 transition-all duration-300" style={{animationDelay: '0.5s'}}></div>
+                <span>24/7 Monitoring</span>
+              </div>
+              <div className="flex items-center gap-2 text-white/60 text-sm cursor-pointer hover:text-white transition-colors duration-300 group">
+                <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse group-hover:w-3 group-hover:h-3 transition-all duration-300" style={{animationDelay: '1s'}}></div>
+                <span>Global Coverage</span>
+              </div>
+            </div>
+
+            {/* Gradient Divider */}
+            <div className="mt-8 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
           </div>
         )}
-
-        {activeTab === 'filter' && <FilterNews />}
-        {activeTab === 'detect' && <DetectFakeNews />}
-        {activeTab === 'summarize' && <SummarizeArticles />}
-        {activeTab === 'validate' && <ValidateFacts />}
-        {activeTab === 'questions' && <UserQuestions />}
-        {activeTab === 'feedback' && <CrowdFeedback />}
-        </main>
-      </AppWrapper>
-  )}
+        
+        <div className={activeTab !== 'dashboard' ? 'bg-black/20 backdrop-blur-xl rounded-lg border border-white/10 p-6' : ''}>
+          {activeTab === 'filter' && <FilterNews />}
+          {activeTab === 'detect' && <DetectFakeNews />}
+          {activeTab === 'summarize' && <SummarizeArticles />}
+          {activeTab === 'validate' && <ValidateFacts />}
+          {activeTab === 'questions' && <UserQuestions />}
+          {activeTab === 'feedback' && <CrowdFeedback />}
+        </div>
+      </main>
+    </div>
+  );
+}
