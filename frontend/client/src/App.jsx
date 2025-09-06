@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from './components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './components/ui/card';
-import { Badge } from './components/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from './components/ui/tabs';
-import { FilterNews } from './components/FilterNews.jsx';
-import { DetectFakeNews } from './components/DetectFakeNews.jsx';
-import { SummarizeArticles } from './components/SummarizeArticles.jsx';
-import { ValidateFacts } from './components/ValidateFacts.jsx';
-import { UserQuestions } from './components/UserQuestions.jsx';
-import { CrowdFeedback } from './components/CrowdFeedback.jsx';
-import { EcosystemDiagram } from './components/EcosystemDiagram.jsx';
-import { InteractiveLogo } from './components/InteractiveLogo.jsx';
+import { Button } from './components/ui/button.js';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './components/ui/card.js';
+import { Badge } from './components/ui/badge.js';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from './components/ui/tabs.js';
+import { FilterNews } from './Components/FilterNews.jsx';
+import { DetectFakeNews } from './Components/DetectFakeNews.jsx';
+import { SummarizeArticles } from './Components/SummarizeArticles.jsx';
+import { ValidateFacts } from '.';
+import { UserQuestions } from './Components/UserQuestions.jsx';
+import { CrowdFeedback } from './Components/CrowsFeedback.js';
+import { EcosystemDiagram } from './Components/EcosystemDiagram.jsx';
+import { InteractiveLogo } from './Components/InteractiveLogo.jsx';
 import { 
   Filter, 
   Shield, 
@@ -504,6 +504,8 @@ export default function App() {
               </div>
             </div>
 
+
+
             {/* Gradient Divider */}
             <div className="mt-8 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
           </div>
@@ -512,7 +514,6 @@ export default function App() {
         <div className={activeTab !== 'dashboard' ? 'bg-black/20 backdrop-blur-xl rounded-lg border border-white/10 p-6' : ''}>
           {activeTab === 'filter' && <FilterNews />}
           {activeTab === 'detect' && <DetectFakeNews />}
-          {activeTab === 'summarize' && <SummarizeArticles />}
           {activeTab === 'validate' && <ValidateFacts />}
           {activeTab === 'questions' && <UserQuestions />}
           {activeTab === 'feedback' && <CrowdFeedback />}
