@@ -6,7 +6,7 @@ import { Textarea } from './ui/textarea';
 import { Badge } from './ui/badge';
 import { Progress } from './ui/progress';
 import { Alert, AlertDescription } from './ui/alert';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from './Ui/tabs';
 import { 
   Shield, 
   AlertTriangle, 

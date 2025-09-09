@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
-import { Button } from './ui/button';
-import { Badge } from './ui/badge';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './Ui/Card.jsx';
+import { Button } from './Ui/Button.jsx';
+import { Badge } from './Ui/badge.jsx';
 import { Progress } from './ui/progress';
 import { Avatar, AvatarFallback } from './ui/avatar';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from './Ui/tabs.jsx';
 import { Alert, AlertDescription } from './ui/alert';
 import { 
   Users, 

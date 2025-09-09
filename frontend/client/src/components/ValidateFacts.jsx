@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
-import { Button } from './ui/button';
-import { Input } from './ui/input';
-import { Badge } from './ui/badge';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './Ui/Card.jsxd';
+import { Button } from './Ui/Button.jsx';
+import { Input } from './Ui/input';
+import { Badge } from './Ui/badge.jsx';
 import { Progress } from './ui/progress';
 import { Alert, AlertDescription } from './ui/alert';
 import { 

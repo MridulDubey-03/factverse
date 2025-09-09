@@ -1,26 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from './components/ui/button.js';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './components/ui/card.js';
-import { Badge } from './components/ui/badge.js';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from './components/ui/tabs.js';
-import { FilterNews } from './Components/FilterNews.jsx';
-import { DetectFakeNews } from './Components/DetectFakeNews.jsx';
-import { SummarizeArticles } from './Components/SummarizeArticles.jsx';
-import { ValidateFacts } from '.';
-import { UserQuestions } from './Components/UserQuestions.jsx';
-import { CrowdFeedback } from './Components/CrowsFeedback.js';
-import { EcosystemDiagram } from './Components/EcosystemDiagram.jsx';
-import { InteractiveLogo } from './Components/InteractiveLogo.jsx';
-import { 
-  Filter, 
-  Shield, 
-  FileText, 
-  CheckCircle, 
-  HelpCircle, 
-  Users, 
-  Menu,
-  X
-} from 'lucide-react';
+import { Button } from './components/Ui/Button.jsx';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './components/Ui/Card.jsx';
+import { Badge } from './components/Ui/badge.jsx';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from './components/Ui/tabs.jsx';
+import { FilterNews } from './components/FilterNews.jsx';
+import { DetectFakeNews } from './components/DetectFakeNews.jsx';
+import { SummarizeArticles } from './components/SummarizeArticles.jsx';
+import { ValidateFacts } from './components/ValidateFacts.jsx';
+import { UserQuestions } from './components/UserQuestions.jsx';
+import { CrowdFeedback } from './components/CrowdFeedback.jsx';
+import { EcosystemDiagram } from './components/EcosystemDiagram.jsx';
+import { InteractiveLogo } from './components/InteractiveLogo.jsx';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -514,6 +504,7 @@ export default function App() {
         <div className={activeTab !== 'dashboard' ? 'bg-black/20 backdrop-blur-xl rounded-lg border border-white/10 p-6' : ''}>
           {activeTab === 'filter' && <FilterNews />}
           {activeTab === 'detect' && <DetectFakeNews />}
+          {activeTab === 'summarize' && <SummarizeArticles />}
           {activeTab === 'validate' && <ValidateFacts />}
           {activeTab === 'questions' && <UserQuestions />}
           {activeTab === 'feedback' && <CrowdFeedback />}
