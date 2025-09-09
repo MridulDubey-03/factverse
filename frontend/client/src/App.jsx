@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from './components/Ui/Button.jsx';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './components/Ui/Card.jsx';
-import { Badge } from './components/Ui/badge.jsx';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from './components/Ui/tabs.jsx';
+import { Button } from './components/ui/button.jsx';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './components/ui/card.jsx';
+import { Badge } from './components/ui/badge.jsx';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from './components/ui/Tabs.jsx';
 import { FilterNews } from './components/FilterNews.jsx';
-import { DetectFakeNews } from './components/DetectFakeNews.jsx';
-import { SummarizeArticles } from './components/SummarizeArticles.jsx';
+import { DetectFakeNews } from './Components/DetectFakeNews.jsx';
+import { SummarizeArticles } from './Components/SummarizeArticles.jsx';
 import { ValidateFacts } from './components/ValidateFacts.jsx';
 import { UserQuestions } from './components/UserQuestions.jsx';
 import { CrowdFeedback } from './components/CrowdFeedback.jsx';
