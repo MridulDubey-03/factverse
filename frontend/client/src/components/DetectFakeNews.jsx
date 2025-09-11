@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card.jsx';
-import { Button } from './ui/button.jsx';
-import { Input } from './ui/input.js';
-import { Textarea } from './ui/textarea.js';
-import { Badge } from './ui/badge.jsx';
-import { Progress } from './ui/progress.js';
-import { Alert, AlertDescription } from './ui/alert.js';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/Tabs.jsx';
+import { Button } from './components/ui/button.jsx';
+import { Input } from './components/ui/input.js';
+import { Textarea } from './components/ui/textarea.js';
+import { Badge } from './components/ui/badge.jsx';
+import { Progress } from './components/ui/progress.js';
+import { Alert, AlertDescription } from './components/ui/alert.js';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from './components/ui/Tabs.jsx';
 import { 
   Shield, 
   AlertTriangle, 

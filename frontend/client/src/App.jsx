@@ -1,15 +1,27 @@
+// Corrected App.jsx
+
 import React, { useState, useEffect } from 'react';
 import { Button } from './components/ui/button.jsx';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './components/ui/card.jsx';
 import { Badge } from './components/ui/badge.jsx';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './components/ui/Tabs.jsx';
+
+// FIXED: Import all required icons from a library like 'lucide-react'
+import { FileText, Filter, Shield, CheckCircle, HelpCircle, Users, Menu, X } from 'lucide-react';
+
+// FIXED: Standardize component import paths to be consistent (e.g., all start with './components')
+// Assuming all components are in './components' and start with a capital letter
 import { FilterNews } from './components/FilterNews.jsx';
-import { DetectFakeNews } from './Components/DetectFakeNews.jsx';
-import { SummarizeArticles } from './Components/SummarizeArticles.jsx';
+import { DetectFakeNews } from './components/DetectFakeNews.jsx';
+import { SummarizeArticles } from './components/SummarizeArticles.jsx';
 import { ValidateFacts } from './components/ValidateFacts.jsx';
 import { UserQuestions } from './components/UserQuestions.jsx';
 import { CrowdFeedback } from './components/CrowdFeedback.jsx';
-import { EcosystemDiagram } from './components/EcosystemDiagram.jsx';
+
+// FIXED: Removed the import for EcosystemDiagram, as it was not used in the render logic
+// import { EcosystemDiagram } from './components/EcosystemDiagram.jsx';
+
+// Assuming the InteractiveLogo component is located here.
 import { InteractiveLogo } from './components/InteractiveLogo.jsx';
 
 export default function App() {
@@ -25,7 +37,6 @@ export default function App() {
     queue: 0
   });
 
-  // Mouse tracking for interactive effects
   const handleMouseMove = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
     setMousePosition({
@@ -34,7 +45,6 @@ export default function App() {
     });
   };
 
-  // Click effect animation
   const handleClick = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
     setClickEffect({
@@ -45,7 +55,6 @@ export default function App() {
     setTimeout(() => setClickEffect({ show: false, x: 0, y: 0 }), 1000);
   };
 
-  // Animated counter effect
   useEffect(() => {
     const targets = { articles: 12847, users: 8924, queue: 47 };
     const duration = 2000;
@@ -493,8 +502,6 @@ export default function App() {
                 <span>Global Coverage</span>
               </div>
             </div>
-
-
 
             {/* Gradient Divider */}
             <div className="mt-8 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>

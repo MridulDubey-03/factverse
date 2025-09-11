@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/Card.jsxd';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card.jsx';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Badge } from './ui/badge';
