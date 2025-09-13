@@ -4,7 +4,7 @@ import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Badge } from './ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
-import { Checkbox } from '.ui/checkbox';
+import { Checkbox } from "./ui/checkbox";
 import { Slider } from './ui/slider';
 import { Filter, Search, Calendar, TrendingUp, Shield, AlertCircle, CheckCircle } from 'lucide-react';
 
